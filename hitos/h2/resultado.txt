@@ -1,0 +1,17 @@
+Equipo: Python 3.14.10 en Windows AMD64
+Semilla: 42 | Ventas por corrida: 1,000 | Protocolo: 1 calentamiento + 3 repeticiones, promedio
+
+| n | Lista: ms (promedio) | Lista: veces vs fila anterior | Lista: ruido | Diccionario: ms (promedio) | Diccionario: veces vs fila anterior | Diccionario: ruido |
+|---|---|---|---|---|---|---|
+| 10,000 | 105.61 | — | 6 % | 0.071 | — | 8 % |
+| 20,000 | 294.68 | 2.79 | 9 % | 0.080 | 1.13 | 11 % |
+| 40,000 | 510.16 | 1.73 | 6 % | 0.095 | 1.19 | 18 % |
+| 80,000 | 1044.32 | 2.05 | 9 % | 0.106 | 1.11 | 22 % |
+
+Las 3 repeticiones de cada celda (ms):
+| n | Lista | Diccionario |
+|---|---|---|
+| 10,000 | 105.96 / 108.51 / 102.36 | 0.074 / 0.069 / 0.069 |
+| 20,000 | 282.82 / 310.50 / 290.73 | 0.085 / 0.078 / 0.077 |
+| 40,000 | 529.33 / 504.09 / 497.05 | 0.106 / 0.091 / 0.089 |
+| 80,000 | 1099.42 / 1009.40 / 1024.14 | 0.121 / 0.099 / 0.098 |
