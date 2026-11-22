@@ -16,7 +16,7 @@ Cada corrida usa un receptor nuevo y vacío, y crearlo no entra en el tiempo med
 Tres tamaños que se duplican: n = 10 000, 2n = 20 000 y 4n = 40 000. Con 4n la ingenua tardó 1644 ms, dentro del rango pedido (0.5 a 20 segundos).
 "Ruido" es (máximo − mínimo) / promedio entre las 3 corridas medidas.
 
-Equipo: [COMPLETAR: versión de .NET (`dotnet --version`), Windows y procesador].
+Equipo: .NET 10.0.403 en Windows, procesador 11th Gen Intel(R) Core(TM) i7-11700F @ 2.50GHz.
 
 ## El O que declaré (ver `eleccion.md`)
 
