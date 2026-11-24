@@ -35,10 +35,27 @@ Cuándo cambiaría a dinámica: si las denominaciones dejaran de ser un sistema 
 
 Protocolo igual al de H2: 1 calentamiento + 3 repeticiones, promedio, semilla 42, 500 cambios por jornada, tamaño = monto máximo en centavos, duplicado en cada fila. La dinámica construye su tabla una vez por jornada y luego consulta; las dos terminan con las mismas piezas en cada cambio (columna "piezas iguales").
 
-Pega aquí la salida de `python medicion_h3.py` en tu PC:
+Salida de `python medicion_h3.py` en mi PC (Python 3.14.10 en Windows AMD64):
 
 ```
-(resultados de tu equipo)
+Denominaciones de Bolivia: montos revisados = 10,000, donde voraz != óptimo = 0
+Contraejemplo [4, 3, 1], monto 6: voraz = 3 piezas, óptimo = 2 piezas
+
+| n (monto máx., centavos) | Voraz: ms | veces vs anterior | ruido | Dinámica: ms | veces vs anterior | ruido | piezas iguales |
+|---|---|---|---|---|---|---|---|
+| 10,000 | 0.247 | — | 3 % | 5.010 | — | 3 % | sí |
+| 20,000 | 0.264 | 1.07 | 13 % | 11.371 | 2.27 | 8 % | sí |
+| 40,000 | 0.247 | 0.93 | 1 % | 23.242 | 2.04 | 2 % | sí |
+| 80,000 | 0.246 | 1.00 | 2 % | 48.668 | 2.09 | 5 % | sí |
 ```
 
-Qué esperar: el voraz casi no depende del tamaño (siempre recorre las mismas 11 denominaciones), y la dinámica crece con el monto máximo porque construye una tabla de ese tamaño. Anota qué razones obtuviste y si coinciden; con 3 repeticiones puede haber ruido, como en H2.
+Qué esperar: el voraz casi no depende del tamaño (siempre recorre las mismas 11 denominaciones), y la dinámica crece con el monto máximo porque construye una tabla de ese tamaño.
+
+**Lo que obtuve:**
+
+1. **El voraz acierta con las denominaciones de Bolivia:** en los 10 000 montos revisados no hubo ninguna diferencia con el óptimo, y en las cuatro filas de la medición las dos estrategias dieron las mismas piezas en cada cambio (columna «piezas iguales»). Con {4, 3, 1} y monto 6 sí falla (3 piezas contra 2), así que el acierto depende de las denominaciones y no del algoritmo.
+2. **El voraz no depende del tamaño:** 0.247, 0.264, 0.247 y 0.246 ms; las razones (×1.07, ×0.93, ×1.00) son ruido, con 13 % en la segunda fila.
+3. **La dinámica se duplica con n:** de 5.010 a 48.668 ms, con razones de ×2.27, ×2.04 y ×2.09, coherente con una tabla cuyo tamaño crece con el monto máximo.
+4. **Diferencia entre las dos:** con n = 80,000 la dinámica tarda unas 198 veces más que el voraz (48.668 contra 0.246 ms), y con n = 10,000 unas 20 veces.
+
+Mis razones coinciden con lo esperado. Con 3 repeticiones puede haber ruido (13 % en una celda del voraz), pero la tendencia es clara y no cambia el veredicto: **voraz** para mi caso.
