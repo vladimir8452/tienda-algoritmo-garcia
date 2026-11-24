@@ -11,27 +11,29 @@ Cada corrida hace **700 búsquedas** (una jornada) a productos que existen, eleg
 
 **Protocolo:** 1 corrida de calentamiento (no se mide), 3 repeticiones medidas con `time.perf_counter()`, se reporta el promedio. "Ruido" = (máx − mín) / promedio.
 
-Equipo: Python 3.12.3 en Linux x86_64. Código: `busqueda.py`. Salida completa: `resultado.txt`.
+Equipo: Python 3.14.10 en Windows AMD64 (mi PC). Código: `busqueda.py`. Salida completa: `resultado.txt`.
 
 ## Resultados (700 búsquedas, ms)
 
 | n | Lineal: ms | Binaria: ms | Cociente lineal / binaria | Ruido lineal | Ruido binaria |
 |---|---|---|---|---|---|
-| 5,000 | 46.19 | 0.783 | 59 | 7 % | 4 % |
-| 10,000 | 82.35 | 0.835 | 99 | 1 % | 10 % |
-| **20,000 (mi catálogo)** | **176.94** | **0.889** | **199** | 11 % | 1 % |
-| 40,000 | 382.52 | 1.089 | 351 | 0 % | 27 % |
+| 5,000 | 50.94 | 0.791 | 64 | 2 % | 6 % |
+| 10,000 | 96.10 | 0.872 | 110 | 6 % | 1 % |
+| **20,000 (mi catálogo)** | **265.96** | **0.918** | **290** | 16 % | 1 % |
+| 40,000 | 483.38 | 1.018 | 475 | 3 % | 0 % |
 
-Con n = 20,000 una jornada de búsquedas tarda 177 ms con la lineal y 0,9 ms con la binaria: unas 200 veces menos. El cociente crece al aumentar n (59 → 351), como se espera de O(n) frente a O(log n): la lineal se duplica con n y la binaria casi no cambia. El ruido de la binaria en n = 40,000 (27 %) viene de una sola repetición lenta (1.281 ms contra 1.002 y 0.984), y a estos tiempos tan chicos cualquier interrupción pesa mucho.
+Con n = 20,000 una jornada de búsquedas tarda 266 ms con la lineal y 0,92 ms con la binaria: unas 290 veces menos. El cociente crece al aumentar n (64 → 475), como se espera de O(n) frente a O(log n): la lineal crece con n y la binaria casi no cambia.
+
+La lineal debería duplicarse con n. Dio ×1.89, ×2.77 y ×1.82; el ×2.77 del 20,000 viene en parte de una repetición lenta (292.24 ms contra 255.33 y 250.31; ruido de 16 %). No comprobé si fue ruido del equipo u otro efecto. Aun así, la tendencia coincide con O(n).
 
 ## ¿Conviene ordenar primero en mi proceso?
 
-Medí también ordenar una vez con `sorted()` (3.77 ms con n = 20,000): ordenar + 700 binarias cuesta 4.66 ms contra 176.94 ms de las lineales, y el orden se paga solo después de ~15 búsquedas, así que **si buscara en una lista, sí conviene ordenar primero** (con mi propio MergeSort de C5, 33 ms, se paga tras ~130 búsquedas: también conviene con 700 al día).
+Medí también ordenar una vez con `sorted()` (3.55 ms con n = 20,000): ordenar + 700 binarias cuesta 4.47 ms contra 265.96 ms de las lineales, y el orden se paga solo después de ~9 búsquedas. Con mi propio MergeSort de C5 (37.7 ms) se paga tras unas 100 búsquedas. Como hago ~700 al día, **si buscara en una lista, sí conviene ordenar primero**.
 
-Pero **en mi proceso no hace falta ni lista ordenada ni binaria**: la estructura que elegí en H2 es el diccionario (O(1) promedio) y no necesita orden; solo ordeno una vez al día para el reporte. La binaria sería la opción si necesitara rangos u orden de forma continua (no es mi caso). Esto último lo razono con los datos de H2, no lo medí aquí: son otro equipo y otro experimento.
+Pero **en mi proceso no hace falta ni lista ordenada ni binaria**: la estructura que elegí en H2 es el diccionario (O(1) promedio) y no necesita orden; solo ordeno una vez al día para el reporte. La binaria sería la opción si necesitara rangos u orden de forma continua (no es mi caso). Esto último lo razono con los datos de H2, no lo medí en esta práctica.
 
 ## Límites de la medición
 
-- Una sola máquina y un solo lenguaje (Python); en tu PC los milisegundos serán otros, el cociente debería ser parecido. Vuelve a correr `python busqueda.py` y pega tu salida en `resultado.txt`.
+- Un solo equipo y un solo lenguaje (Python); los milisegundos dependen del equipo, el cociente debería ser parecido.
 - Solo busco productos que existen; las búsquedas de códigos inexistentes recorren siempre la lista completa y favorecerían aún más a la binaria.
-- 3 repeticiones: los ruidos de arriba muestran que las diferencias pequeñas (por ejemplo entre filas de la binaria) no son concluyentes.
+- 3 repeticiones: con tiempos de 1 ms o menos y ruidos de hasta 16 %, las diferencias pequeñas no son concluyentes.

@@ -1,12 +1,12 @@
-Equipo: Python 3.12.3 en Linux x86_64
+Equipo: Python 3.14.10 en Windows AMD64
 n = 20,000 | Semilla: 42 | Protocolo: 1 calentamiento + 3 repeticiones, promedio
 
 Tiempo en ms (promedio; entre paréntesis, el ruido):
 
 | Forma de los datos | Inserción | MergeSort | QuickSort | sorted() de Python |
 |---|---|---|---|---|
-| aleatorio | 5,735.0 (3 %) | 33.3 (0 %) | 36.9 (5 %) | 3.7 (3 %) |
-| casi ordenado (10 fuera de lugar) | 7.0 (0 %) | 20.6 (1 %) | 34.9 (13 %) | 0.2 (12 %) |
-| ordenado | 1.4 (2 %) | 22.3 (1 %) | 36.5 (33 %) | 0.2 (12 %) |
-| inverso | 11,418.1 (1 %) | 21.5 (2 %) | 37.8 (17 %) | 0.1 (0 %) |
-| 5 % repetidos | 5,651.7 (6 %) | 33.2 (1 %) | 35.3 (8 %) | 3.7 (1 %) |
+| aleatorio | 6,384.1 (1 %) | 40.4 (13 %) | 35.3 (2 %) | 3.8 (12 %) |
+| casi ordenado (10 fuera de lugar) | 7.7 (1 %) | 24.0 (0 %) | 33.9 (10 %) | 0.2 (1 %) |
+| ordenado | 1.5 (4 %) | 24.0 (1 %) | 32.6 (1 %) | 0.2 (1 %) |
+| inverso | 12,468.5 (1 %) | 28.4 (34 %) | 36.0 (7 %) | 0.2 (1 %) |
+| 5 % repetidos | 6,226.9 (2 %) | 38.3 (1 %) | 36.3 (9 %) | 3.6 (1 %) |
