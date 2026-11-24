@@ -24,7 +24,7 @@ Equipo: Python 3.14.10 en Windows AMD64 (mi PC). Código: `busqueda.py`. Salida 
 
 Con n = 20,000 una jornada de búsquedas tarda 266 ms con la lineal y 0,92 ms con la binaria: unas 290 veces menos. El cociente crece al aumentar n (64 → 475), como se espera de O(n) frente a O(log n): la lineal crece con n y la binaria casi no cambia.
 
-La lineal debería duplicarse con n. Dio ×1.89, ×2.77 y ×1.82; el ×2.77 del 20,000 viene en parte de una repetición lenta (292.24 ms contra 255.33 y 250.31; ruido de 16 %). No comprobé si fue ruido del equipo u otro efecto. Aun así, la tendencia coincide con O(n).
+La lineal debería duplicarse con n. Dio ×1.89, ×2.77 y ×1.82. Repetí la medición completa en una copia limpia del repositorio y salió ×1.86, ×2.77 y ×1.88 (245.59 ms con n = 20,000, ruido de 6 %), así que el salto del 20,000 **se repite y no es ruido**. No sé a qué se debe: podría ser la memoria caché del procesador, pero no lo comprobé; algo parecido vi en H2 (×2.79 en la primera duplicación). Fuera de ese salto, la tendencia coincide con O(n).
 
 ## ¿Conviene ordenar primero en mi proceso?
 
