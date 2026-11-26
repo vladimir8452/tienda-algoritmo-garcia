@@ -1,0 +1,13 @@
+Equipo: Python 3.14.10 en Windows AMD64
+Protocolo: 1 calentamiento + 5 corridas, promedio | n = 50,000, 4n, 16n
+
+| n | Promedio (ms) | Razón vs fila anterior | Esperado | Ruido |
+|---|---|---|---|---|
+| 50,000 | 1.000 | — | — | 3 % |
+| 200,000 | 4.647 | 4.65 | ≈ 4 | 20 % |
+| 800,000 | 17.904 | 3.85 | ≈ 4 | 16 % |
+
+Las 5 corridas de cada fila (ms):
+n = 50,000: 1.017 / 0.990 / 0.996 / 0.996 / 1.000
+n = 200,000: 4.207 / 4.714 / 5.076 / 5.076 / 4.162
+n = 800,000: 17.040 / 17.281 / 17.263 / 19.918 / 18.020
